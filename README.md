@@ -23,3 +23,6 @@ You can try the tool here: [Image Corner Rounding Tool](https://403observant.git
 2. **Adjust the Corner Radius**: Use the slider or manually input a value to adjust the radius of the corners.
 3. **Preview**: As you adjust the radius, the image preview will update in real-time.
 4. **Download**: Once satisfied with the rounded corners, click the "Download image" button to download the modified image.
+
+## Screenshot
+![rounded-image(2)](https://github.com/user-attachments/assets/164ae2c3-e9fd-443e-b0b5-d300b9ad0633)
