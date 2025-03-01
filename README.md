@@ -2,7 +2,7 @@
 
 This web tool allows you to upload an image and round its corners with customizable radius. You can preview the changes and download the modified image in PNG format with rounded corners.
 
-You can try the tool here: [Image Corner Rounding Tool](https://403observant.github.io/Rounding/)
+You can try the tool here: [Image Corner Rounding Tool](https://crusader916.github.io/Rounding/)
 
 ## Features
 
