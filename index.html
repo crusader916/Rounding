@@ -1,26 +1,147 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Corner Rounding</title>
+    <title>Image Corner Master | Профессиональное скругление углов</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h1>Image Corner Rounding</h1>
-        <div class="upload-container">
-            <label for="imageInput" class="upload-button">Choose an image</label>
+    <div class="particles-container" id="particles"></div>
+    
+    <div class="container fade-in">
+        <div class="header">
+            <h1>Image Corner Master</h1>
+            <p class="subtitle">Профессиональное скругление углов изображений</p>
         </div>
-        <div class="controls">
-            <label>Corner radius: <input type="range" id="radiusSlider" min="0" max="100" value="10"></label>
-            <span id="radiusValue" contenteditable="true">10px</span>
+        
+        <div class="upload-container slide-up">
+            <label for="imageInput" class="upload-button">
+                <span class="upload-icon">📁</span>
+                <span class="upload-text">Выберите изображение</span>
+            </label>
+            <input type="file" id="imageInput" accept="image/*" style="display: none">
+            <p class="upload-info">Поддерживаются форматы: JPG, PNG, WebP, GIF</p>
         </div>
-        <div class="preview-container">
-            <img id="preview" alt="Preview">
+        
+        <div class="preview-container" id="previewWrapper">
+            <div class="preview-header">
+                <span class="preview-title">Предпросмотр</span>
+                <div class="preview-actions">
+                    <button id="resetBtn" class="action-button" title="Сбросить настройки">↺</button>
+                </div>
+            </div>
+            <div class="image-container">
+                <img id="preview" alt="Предпросмотр изображения">
+                <div class="image-placeholder">
+                    <div class="placeholder-icon">🖼️</div>
+                    <div class="placeholder-text">Выберите изображение для начала работы</div>
+                </div>
+            </div>
         </div>
-        <button id="downloadBtn" disabled>Download image</button>
+        
+        <div class="controls-wrapper slide-up" id="controlsWrapper">
+            <div class="controls-tabs">
+                <button class="tab-button active" data-tab="basic">Основные</button>
+                <button class="tab-button" data-tab="advanced">Расширенные</button>
+            </div>
+            
+            <div class="controls-panel active" id="basicControls">
+                <div class="control-group">
+                    <label class="control-label">
+                        <span class="label-text">Радиус скругления</span>
+                        <span class="control-value" id="radiusValue" contenteditable="true">10px</span>
+                    </label>
+                    <input type="range" id="radiusSlider" min="0" max="100" value="10" class="slider">
+                    <div class="control-presets">
+                        <button class="preset-button" data-value="0">0px</button>
+                        <button class="preset-button" data-value="10">10px</button>
+                        <button class="preset-button" data-value="20">20px</button>
+                        <button class="preset-button" data-value="50">50px</button>
+                        <button class="preset-button" data-value="100">100px</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="controls-panel" id="advancedControls">
+                <div class="control-group">
+                    <label class="control-label">
+                        <span class="label-text">Верхний левый</span>
+                        <span class="control-value" id="topLeftValue" contenteditable="true">10px</span>
+                    </label>
+                    <input type="range" id="topLeftSlider" min="0" max="100" value="10" class="slider">
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label">
+                        <span class="label-text">Верхний правый</span>
+                        <span class="control-value" id="topRightValue" contenteditable="true">10px</span>
+                    </label>
+                    <input type="range" id="topRightSlider" min="0" max="100" value="10" class="slider">
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label">
+                        <span class="label-text">Нижний правый</span>
+                        <span class="control-value" id="bottomRightValue" contenteditable="true">10px</span>
+                    </label>
+                    <input type="range" id="bottomRightSlider" min="0" max="100" value="10" class="slider">
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label">
+                        <span class="label-text">Нижний левый</span>
+                        <span class="control-value" id="bottomLeftValue" contenteditable="true">10px</span>
+                    </label>
+                    <input type="range" id="bottomLeftSlider" min="0" max="100" value="10" class="slider">
+                </div>
+                
+                <div class="control-actions">
+                    <button id="linkCornersBtn" class="action-button active" title="Связать все углы">🔗</button>
+                    <button id="randomCornersBtn" class="action-button" title="Случайные значения">🎲</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="export-options" id="exportOptions">
+            <div class="option-group">
+                <label class="option-label">Формат:</label>
+                <div class="option-buttons">
+                    <button class="option-button active" data-format="png">PNG</button>
+                    <button class="option-button" data-format="jpg">JPG</button>
+                    <button class="option-button" data-format="webp">WebP</button>
+                </div>
+            </div>
+            
+            <div class="option-group">
+                <label class="option-label">Качество:</label>
+                <input type="range" id="qualitySlider" min="50" max="100" value="90" class="slider">
+                <span id="qualityValue">90%</span>
+            </div>
+        </div>
+        
+        <div class="actions">
+            <button id="copyBtn" class="action-button secondary" title="Копировать в буфер обмена">
+                <span class="button-icon">📋</span>
+                <span class="button-text">Копировать</span>
+            </button>
+            
+            <button id="downloadBtn" class="action-button primary" disabled>
+                <span class="button-icon">💾</span>
+                <span class="button-text">Скачать</span>
+            </button>
+        </div>
     </div>
+    
+    <div id="toast" class="toast"></div>
+    
+    <footer class="footer">
+        <p>ᴅᴇᴠ ʙʏ ᴄʀᴜsᴀᴅᴇʀ</p>
+    </footer>
+    
     <script src="script.js"></script>
 </body>
 </html>
